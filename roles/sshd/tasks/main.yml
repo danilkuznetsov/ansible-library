@@ -1,0 +1,23 @@
+---
+#
+# SSHD role
+#
+# Tasks for SSHD role
+#
+
+- name: install sshd for Debian
+  apt: pkg=openssh-server state=installed
+
+- name: configure sshd
+  template: >
+    src=sshd_config.j2
+    dest=/etc/ssh/sshd_config
+    validate="/usr/sbin/sshd -t -f %s"
+
+- name: enable sshd
+  service: name=ssh enabled=yes
+
+- name: reload_sshd
+  service:
+    name: ssh
+    state: reloaded
