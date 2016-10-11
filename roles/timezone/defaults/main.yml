@@ -1,0 +1,9 @@
+---
+#
+# Timezone role
+#
+# Default variables for timezone role
+#
+
+
+timezone: Europe/Kiev
