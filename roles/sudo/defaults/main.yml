@@ -1,0 +1,13 @@
+---
+#
+# Sudo role
+#
+# Default variables sudo role
+#
+
+sudo_users:
+  - root
+  - "%wheel"
+  - "%sysadmin"
+
+sudo_nopasswd: false

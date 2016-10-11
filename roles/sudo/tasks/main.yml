@@ -1,0 +1,13 @@
+---
+#
+# Sudo role
+#
+# Tasks for sudo role
+#
+
+- name: setup facts
+  set_fact:
+     sudo_users: "{{ sudo_default + sudo_extras }}"
+
+- name: Sudoers file
+  template: src=sudoers.j2 dest=/etc/sudoers validate='/usr/sbin/visudo -cf %s'
