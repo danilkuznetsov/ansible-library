@@ -1,0 +1,52 @@
+---
+#
+# Firewall role
+#
+# Default variables for firewall role
+# 
+
+public_interface: 'eth0'
+private_interface: 'eth1'
+
+sshd_port: '22'
+
+firewall_v4_saved_rules_path: /etc/iptables.v4.saved
+
+firewall_v4_default_rules:
+  
+  001 default policies:
+    - -P INPUT DROP
+    - -P OUTPUT DROP
+    - -P FORWARD DROP
+
+  002 allow loopback:
+    - -A INPUT -i lo -j ACCEPT
+    - -A OUTPUT -o lo -j ACCEPT
+
+  003 disable local traffic on public interface:
+    - -A INPUT -d 255.255.255.255/32 -i {{ public_interface }} -j DROP
+    - -A INPUT -d 192.168.255.255/32 -i {{ public_interface }} -j DROP
+    - -A INPUT -d 192.168.1.255/32 -i {{ public_interface }} -j DROP
+    - -A INPUT -d 10.0.0.0/8 -i {{ public_interface }} -j DROP
+    - -A INPUT -d 169.254.0.0/16 -i {{ public_interface }} -j DROP
+
+  004 disable local traffic on private interface:
+    - -A INPUT -d 255.255.255.255/32 -i {{ private_interface }} -j DROP
+    - -A INPUT -d 192.168.255.255/32 -i {{ private_interface }} -j DROP
+    - -A INPUT -d 192.168.1.255/32 -i {{ private_interface }} -j DROP
+    - -A INPUT -d 169.254.0.0/16 -i {{ private_interface }} -j DROP
+
+  005 allow ping replies:
+    - -A INPUT -p icmp --icmp-type echo-request m limit --limit 10/sec -j ACCEPT
+
+  100 allow established related:
+    - -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+    - -A OUTPUT -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
+
+  200 allow ssh:
+    - -A INPUT -i {{ public_interface }} -p tcp -m tcp --dport {{ sshd_port }} -m state --state NEW -m recent --set --name DEFAULT --mask 255.255.255.255 --rsource -j ACCEPT
+    - -A INPUT -i {{ public_interface }} -p tcp -m tcp --dport {{ sshd_port }} -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --name DEFAULT --mask 255.255.255.255 --rsource -j DROP
+
+firewall_v4_group_rules: {}
+
+firewall_v4_host_rules: {}

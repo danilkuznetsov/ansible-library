@@ -1,0 +1,24 @@
+---
+#
+# Firewall role
+#
+# Tasks for role firewall
+# 
+
+- name: Generate v4 rules
+  template: src=generated.v4.j2 dest=/etc/iptables.v4.generated owner=root group=root mode=755
+  register: v4_script
+
+- name: Load v4 rules
+  command: /etc/iptables.v4.generated
+  when: v4_script|changed
+
+- name: Save v4 rules
+  shell: iptables-save -c > {{ firewall_v4_saved_rules_path }}
+  when: v4_script|changed
+
+- name: Copy v4 save script
+  template: src=save.v4.j2 dest=/etc/network/if-post-down.d/iptables-v4 owner=root group=root mode=755
+
+- name: Copy v4 restore script
+  template: src=restore.v4.j2 dest=/etc/network/if-pre-up.d/iptables-v4 owner=root group=root mode=755

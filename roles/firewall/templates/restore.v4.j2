@@ -1,0 +1,6 @@
+#!/bin/sh
+# {{ ansible_managed }}
+
+iptables-restore < /etc/iptables.v4.saved
+
+exit 0
