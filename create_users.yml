@@ -1,0 +1,18 @@
+---
+#
+# Run users and sudo role
+#
+# Usage:
+# ansible-playbook bootstrap.yml -v -k -i inventory/hosts
+#
+
+- hosts: all
+  become: yes
+
+  # add new users
+  #vars_files:
+  #   - ./vars/users.yml
+
+  roles:
+     - users
+     - sudo
