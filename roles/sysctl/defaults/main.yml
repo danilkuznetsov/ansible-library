@@ -1,0 +1,71 @@
+---
+#
+# Sysctl role
+#
+# Default variables sysctl role
+#
+
+sysctl_config:
+  
+  # Enable RFC-recommended source validation feature.
+  net.ipv4.conf.all.rp_filter: 1
+  net.ipv4.conf.default.rp_filter: 1
+
+  # Do not accept ICMP redirects (prevent MITM attacks)
+  net.ipv4.conf.all.accept_redirects: 0
+
+  # Digital Ocean Recommended Settings:
+  net.core.wmem_max: 12582912
+  net.core.rmem_max: 12582912
+  net.ipv4.tcp_rmem: 10240 87380 12582912
+  net.ipv4.tcp_wmem: 10240 87380 12582912
+
+  # Tuning net 
+  net.core.netdev_max_backlog: 5000
+  net.ipv4.tcp_window_scaling: 1
+
+  # Reduce the surface on SMURF attacks.
+  # Make sure to ignore ECHO broadcasts, which are only required in broad network analysis.
+  net.ipv4.icmp_echo_ignore_broadcasts: 1
+
+  # There is no reason to accept bogus error responses from ICMP, so ignore them instead.
+  net.ipv4.icmp_ignore_bogus_error_responses: 1
+  
+  # Limit the amount of traffic the system uses for ICMP.
+  net.ipv4.icmp_ratelimit: 100
+
+  # Adjust the ICMP ratelimit to include ping, dst unreachable,
+  # source quench, ime exceed, param problem, timestamp reply, information reply
+  net.ipv4.icmp_ratemask: 88089
+
+  # Protect against wrapping sequence numbers at gigabit speeds
+  net.ipv4.tcp_timestamps: 0
+
+  # Define restriction level for announcing the local source IP
+  net.ipv4.conf.all.arp_ignore: 1
+
+  # Define mode for sending replies in response to
+  # received ARP requests that resolve local target IP addresses
+  net.ipv4.conf.all.arp_announce: 2
+
+  # RFC 1337 fix F1
+  net.ipv4.tcp_rfc1337: 1
+  
+  # Uncomment the next line to enable TCP/IP SYN cookies
+  # See http://lwn.net/Articles/277146/
+  # Note: This may impact IPv6 TCP sessions too
+  net.ipv4.tcp_syncookies: 1  
+
+  # Disable ipv6
+  net.ipv6.conf.all.disable_ipv6: 1
+  net.ipv6.conf.default.disable_ipv6: 1
+  net.ipv6.conf.lo.disable_ipv6: 1
+  net.ipv6.conf.eth0.disable_ipv6: 1
+  net.ipv6.conf.eth1.disable_ipv6: 1
+  net.ipv6.conf.all.forwarding: 0
+
+  # ignore RAs on Ipv6.
+  net.ipv6.conf.all.accept_ra: 0
+  net.ipv6.conf.default.accept_ra: 0
+
+  
