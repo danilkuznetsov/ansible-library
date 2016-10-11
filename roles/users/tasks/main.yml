@@ -1,0 +1,44 @@
+---
+#
+# Users role
+#
+# Tasks for users role
+#
+
+- name: Add default groups
+  group: name={{ item }} state=present
+  with_items:
+    - users_group
+
+- name: Add user groups
+  group: name={{ item.group | default(item.name) }} state=present
+  with_flattened:
+    - users.admin
+    - users_extra 
+
+- name: Add users
+  user: name={{ item.name }}
+        group='{{ item.group | default(item.name) }}'
+        groups='{{ item.groups | default([]) | join(",") }}'
+        password={{ item.passwd }}
+        shell=/bin/bash
+        state=present
+  with_flattened:
+    - users.admin
+    - users_extra
+
+- name: Add user SSH keys
+  authorized_key: user={{ item.name }} 
+                  key="{{ lookup('file', inventory_dir + '/../files/keys/' + item.authorized_keys[0] + '.pub') }}"
+                  state=present
+  with_flattened:
+    - users.admin
+    - users_extra
+
+- name: Change root password
+  user: name=root update_password=always password={{ root_passwd }}
+
+- name: Purging old users
+  user: name={{ item }} state=absent
+  with_items: users_purge
+  tags: purge_users

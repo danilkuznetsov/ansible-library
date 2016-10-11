@@ -1,0 +1,32 @@
+---
+#
+# Users role
+#
+# Default variables for users role
+#
+# Encode user password
+#
+# pip install passlib
+#
+# python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+#
+# http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+#
+users_purge: []
+users_extra: []
+
+# add default admin group
+users_group: [admin]
+
+# password = empty-password
+root_passwd: 656000$R0lx11eCqipon4rX$JrqtMegb8avVeEOvEIfgH1msuBAfofn/zaXL0EsumMWQ4ssXN.pxtY150hktKF4Y7.0Rjyr1ZUZ9JS9py.uI4.
+
+# admin users
+users:
+  admin: # admin groups
+    - name: 'admin-user'
+      # passwd = qwert-11
+      passwd: 656000$OR4XJQACVCSzh8QU$YOY72CBJmTcO0mfbwuK/DYI6T1k7J1QSNeUvfgHkhhdy.UGb8X46/0/Q.mNBJN6xJAv4c3qBj/iTkrGTPQ1b21
+      groups: ['admin','adm']
+      authorized_keys:
+        - admin-user
