@@ -1,0 +1,20 @@
+---
+#
+# Common role
+#
+# Default variables common role
+#
+
+common_pkgs:
+  - curl
+  - tree
+  - screen
+  - tmux
+  - curl
+  - vim-tiny
+  - dnsutils
+  - inetutils-telnet
+  - netcat
+  - htop
+  - iftop
+  - mc
