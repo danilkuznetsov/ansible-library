@@ -1,0 +1,9 @@
+---
+#
+# Swap role
+#
+# Handlers for swap role
+#
+
+- name: Reload sysctl
+  command: sysctl -p
