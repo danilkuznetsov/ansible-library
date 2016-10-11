@@ -1,0 +1,22 @@
+---
+#
+# Security role
+#
+# Tasks for security role
+#
+
+- name: install security packages
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items: security_pkgs 
+
+- name: configure periodic unattended-upgrades
+  template: >
+    src=etc/apt/apt.conf.d/10periodic
+    dest=/etc/apt/apt.conf.d/10periodic
+    owner=root group=root mode=0644
+
+- name: only unattended-upgrade from security repo
+  template: >
+    src=etc/apt/apt.conf.d/20unattended-upgrade
+    dest=/etc/apt/apt.conf.d/20unattended-upgrade
+    owner=root group=root mode=0644

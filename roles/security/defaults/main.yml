@@ -1,0 +1,9 @@
+---
+#
+# Security role
+#
+# Default variables for security role
+#
+
+security_pkgs:
+  - unattended-upgrades
