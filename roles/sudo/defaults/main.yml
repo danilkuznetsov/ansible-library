@@ -5,9 +5,11 @@
 # Default variables sudo role
 #
 
-sudo_users:
-  - root
-  - "%wheel"
-  - "%sysadmin"
-
 sudo_nopasswd: false
+
+sudo_default:
+  - "%sudo"
+  - "%admin"
+
+sudo_extras: []
+sudo_extra_lines: []
