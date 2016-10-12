@@ -5,11 +5,8 @@
 # Tasks for postfix send only and relay role
 #
 
-- name: install libsasl
-  apt: pkg=libsasl2-modules state=present
-
-- name: install postfix
-  apt: pkg=postfix state=present
+- name: install mailutils
+  apt: pkg=mailutils state=present
 
 - name: Backup original postfix main.cf
   command: cp /etc/postfix/main.cf /etc/postfix/main.cf.backup

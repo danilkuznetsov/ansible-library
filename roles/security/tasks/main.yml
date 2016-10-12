@@ -17,6 +17,6 @@
 
 - name: only unattended-upgrade from security repo
   template: >
-    src=etc/apt/apt.conf.d/20unattended-upgrade
-    dest=/etc/apt/apt.conf.d/20unattended-upgrade
+    src=etc/apt/apt.conf.d/50unattended-upgrades
+    dest=/etc/apt/apt.conf.d/50unattended-upgrades
     owner=root group=root mode=0644

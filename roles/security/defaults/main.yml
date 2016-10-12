@@ -7,3 +7,5 @@
 
 security_pkgs:
   - unattended-upgrades
+
+email_report : 'root@localhost'

@@ -13,9 +13,10 @@
      - timezone
      - locale 
      - sysctl
+     - postfix-relay
      - security
      - firewall
      - swap
      - sshd
-     - postfix-relay
+
      
