@@ -1,0 +1,67 @@
+---
+#
+# Postfix send only and relay role
+#
+# Tasks for postfix send only and relay role
+#
+
+- name: install libsasl
+  apt: pkg=libsasl2-modules state=present
+
+- name: install postfix
+  apt: pkg=postfix state=present
+
+- name: Backup original postfix main.cf
+  command: cp /etc/postfix/main.cf /etc/postfix/main.cf.backup
+  args:
+    creates: /etc/postfix/main.cf.backup
+
+- name: Configure postfix
+  command: postconf -e {{ item }}
+  with_items:
+    - "mailbox_size_limit=0"
+    - "recipient_delimiter=+"
+    - "inet_interfaces=localhost"
+    - "smtp_sasl_auth_enable={{ postfix_smtp_sasl_auth_enable }}"
+    - "smtp_sasl_password_maps={{ postfix_smtp_sasl_password_maps }}"
+    - "smtp_sasl_security_options={{ postfix_smtp_sasl_security_options }}"
+    - "relayhost={{ postfix_relayhost }}"
+    - "smtp_tls_security_level={{ postfix_smtp_tls_security_level }}"
+    - "smtp_tls_mandatory_ciphers={{ postfix_smtp_tls_mandatory_ciphers }}"
+
+- name: Explain postfix authentication
+  lineinfile:
+    dest: "{{ postfix_password_file }}"
+    line: "# Configured by Ansible:"
+    create: yes
+
+- name: Set permissions of password file
+  file: path="{{ postfix_password_file }}" state=file mode="0600" owner=root group=root
+
+- name: Configure postfix authentication
+  lineinfile:
+    dest: "{{ postfix_password_file }}"
+    line: "{{ postfix_relayhost }}    {{ POSTFIX_EXTERNAL_SMTP_USER }}:{{ POSTFIX_EXTERNAL_SMTP_PASSWORD }}"
+    insertafter: "# Configured by Ansible:"
+  register: postfix_password
+
+- name: Hash postfix SASL password
+  command: "postmap hash:{{ postfix_password_file }}"
+  when: postfix_password.changed
+
+- name: Add email root forward alias to /etc/alias
+  lineinfile:
+    dest: "/etc/aliases"
+    backup: yes
+    state: present
+    insertafter: "EOF"
+    line: "root: {{ root_mail_forward }}"
+  when: root_mail_forward_enable
+
+- name: Rebuild aliases db
+  command: newaliases
+
+- name: Restart Postfix
+  service:
+    name: postfix
+    state: restarted

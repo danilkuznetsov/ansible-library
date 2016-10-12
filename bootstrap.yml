@@ -17,4 +17,5 @@
      - firewall
      - swap
      - sshd
+     - postfix-relay
      

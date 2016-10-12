@@ -1,0 +1,23 @@
+---
+#
+# Postfix relay role
+#
+# Default variables for postfix send only and relay role
+#
+
+postfix_password_file: "/etc/postfix/sasl/passwd"
+postfix_smtp_sasl_auth_enable: "yes"
+postfix_smtp_sasl_password_maps: "hash:{{ postfix_password_file }}"
+postfix_smtp_sasl_security_options:  "noanonymous"
+
+postfix_relayhost: "{{ POSTFIX_EXTERNAL_SMTP_HOST }}:{{ POSTFIX_EXTERNAL_SMTP_PORT }}"
+postfix_smtp_tls_security_level: "encrypt"
+postfix_smtp_tls_mandatory_ciphers: "high"
+
+POSTFIX_EXTERNAL_SMTP_HOST: ''
+POSTFIX_EXTERNAL_SMTP_PORT: 587
+POSTFIX_EXTERNAL_SMTP_USER: ''
+POSTFIX_EXTERNAL_SMTP_PASSWORD: ''
+
+root_mail_forward_enable: False
+root_mail_forward: "root@example.com"
