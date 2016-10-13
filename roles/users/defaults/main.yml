@@ -19,14 +19,14 @@ users_extra: []
 users_group: [admin]
 
 # password = empty-password
-root_passwd: 656000$R0lx11eCqipon4rX$JrqtMegb8avVeEOvEIfgH1msuBAfofn/zaXL0EsumMWQ4ssXN.pxtY150hktKF4Y7.0Rjyr1ZUZ9JS9py.uI4.
+root_passwd: $6$/LjEY1ZOa8D$b3uVy/38WPBr.K7Gib3TyzJJU9ZjMuJyBLy7UYYZ9nw1Jon2PG8YCYHi8WhpgcKOOMY1RI.Q2iCrHNWb9AjdS1
 
 # admin users
 users:
   admin: # admin groups
     - name: 'admin-user'
       # passwd = qwert-11
-      passwd: 656000$OR4XJQACVCSzh8QU$YOY72CBJmTcO0mfbwuK/DYI6T1k7J1QSNeUvfgHkhhdy.UGb8X46/0/Q.mNBJN6xJAv4c3qBj/iTkrGTPQ1b21
+      passwd: $6$qtzv48Uk$3hRmaE.N9i1Byf/lj0wbX/0VrTzM.Ms.4Q0ifauywEUobP2DKa9h8iZGz0Dn3q4hOpp5AfT0d1EQCtk88WVG70
       groups: ['admin','adm']
       authorized_keys:
         - admin-user

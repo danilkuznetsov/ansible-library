@@ -8,4 +8,4 @@
 security_pkgs:
   - unattended-upgrades
 
-email_report : 'root@localhost'
+email_to_report : 'root@localhost'
