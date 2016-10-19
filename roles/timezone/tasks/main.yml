@@ -16,3 +16,13 @@
 - name: Set /etc/timezone to {{ timezone }}
   template: dest=/etc/timezone src=timezone.j2
   notify: update tzdata
+
+- name: install package ntp
+  apt:
+    name: ntp
+    state: latest
+
+- name: service ntp restart
+  service:
+    name: ntp
+    state: restarted
