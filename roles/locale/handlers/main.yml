@@ -1,0 +1,9 @@
+---
+#
+# Locale role
+#
+# Handlers for locale role
+#
+
+- name: update locales
+  command: dpkg-reconfigure --frontend noninteractive locales

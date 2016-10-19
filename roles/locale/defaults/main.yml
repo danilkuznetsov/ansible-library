@@ -5,17 +5,28 @@
 # Default variables for locale role
 #
 
-locale_lang: ru_UA.UTF-8
-locale_all: en_US.UTF-8
-locale_language: en_US
-locale_numeric: ru_UA.UTF-8
-locale_time: ru_UA.UTF-8
-locale_monetary: ru_UA.UTF-8
-locale_paper: ru_UA.UTF-8
-locale_identification: ru_UA.UTF-8
-locale_name: ru_UA.UTF-8
-locale_address: ru_UA.UTF-8
-locale_telephone : ru_UA.UTF-8
-locale_measurement: ru_UA.UTF-8
+locales_present:
+  - en_US.UTF-8
+  - ru_UA.UTF-8
 
-locale_to_be_generated: [ru_UA.UTF-8]
+locales_language_packs_present:
+  - language-pack-en
+  - language-pack-en-base
+  - language-pack-uk
+  - language-pack-uk-base
+  - language-pack-ru
+  - language-pack-ru-base
+
+locales_absent: []
+
+locales_language_packs_absent: []
+
+locales_default:
+  lang: en_US.UTF-8
+  language: "en_US.UTF-8:ru_UA.UTF-8"
+  lc_address: ru_UA.UTF-8
+  lc_time: ru_UA.UTF-8
+  lc_numeric: ru_UA.UTF-8
+  lc_monetary: ru_UA.UTF-8
+  lc_paper: ru_UA.UTF-8
+  lc_measurement: ru_UA.UTF-8
