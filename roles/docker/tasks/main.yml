@@ -1,0 +1,68 @@
+---
+#
+# Docker role
+#
+# Tasks for docker role
+#
+
+- name: Install docker GPG key
+  apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D state=present
+  tags:
+    - docker
+    - gpg_key
+
+- name: Add docker apt repository
+  apt_repository: repo="deb https://apt.dockerproject.org/repo ubuntu-trusty main" state=present
+  tags:
+    - docker
+    - apt_repository
+
+- name: Update apt-cache
+  apt: update_cache=yes
+  tags:
+    - docker
+    - apt_cache
+
+- name: Purge the old repo if it exists
+  apt: name={{ item }} purge=yes
+  with_items:
+    - "lxc-docker*"
+    - "docker.io*"
+  ignore_errors: yes
+
+- name: Install docker package
+  apt: name=docker-engine state=present
+
+- name: Set docker daemon options
+  copy:
+    content: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
+    dest: /etc/default/docker
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install pip, python-dev package with apt
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - python-dev
+    - python-pip
+
+- name: Insall and upgrade pip, setuptools, docker-py and docker-compose with pip
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - pip
+    - setuptools
+    - docker-py
+    - docker-compose
+  ignore_errors: yes
+
+- name: Restart docker
+  service:
+    name: docker
+    state: restarted
+    enabled: yes

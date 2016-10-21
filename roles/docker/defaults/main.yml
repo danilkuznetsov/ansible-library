@@ -1,0 +1,15 @@
+
+---
+#
+# Docker role
+#
+# Default variables docker role
+#
+
+# The following help expose a docker port or to add additional options when
+# running docker daemon.  The default is to not use any special options.
+#docker_opts: >
+#  -H unix://
+#  -H tcp://0.0.0.0:2375
+#  --log-level=debug
+docker_opts: ""
