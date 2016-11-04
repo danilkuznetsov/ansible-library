@@ -14,7 +14,8 @@
   group: name={{ item.group | default(item.name) }} state=present
   with_flattened:
     - users.admin
-    - users_extra 
+    - users.automation
+    - users_extra
 
 - name: Add users
   user: name={{ item.name }}
@@ -25,6 +26,7 @@
         state=present
   with_flattened:
     - users.admin
+    - users.automation
     - users_extra
 
 - name: Add user SSH keys

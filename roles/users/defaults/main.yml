@@ -15,13 +15,13 @@
 users_purge: []
 users_extra: []
 
+
 # add default admin group
 users_group: [admin]
 
 # password = empty-password
 root_passwd: $6$/LjEY1ZOa8D$b3uVy/38WPBr.K7Gib3TyzJJU9ZjMuJyBLy7UYYZ9nw1Jon2PG8YCYHi8WhpgcKOOMY1RI.Q2iCrHNWb9AjdS1
 
-# admin users
 users:
   admin: # admin groups
     - name: 'admin-user'
@@ -30,3 +30,8 @@ users:
       groups: ['admin','adm']
       authorized_keys:
         - admin-user
+  automation:
+    - name: 'robot'
+      # passwd = qwert-11
+      passwd: $6$qtzv48Uk$3hRmaE.N9i1Byf/lj0wbX/0VrTzM.Ms.4Q0ifauywEUobP2DKa9h8iZGz0Dn3q4hOpp5AfT0d1EQCtk88WVG70
+      groups: [] 
