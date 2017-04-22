@@ -8,7 +8,7 @@
 - name: Add default groups
   group: name={{ item }} state=present
   with_items:
-    - users_group
+    - "{{ users_group }}"
 
 - name: Add user groups
   group: name={{ item.group | default(item.name) }} state=present
