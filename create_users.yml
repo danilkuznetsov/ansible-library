@@ -9,10 +9,6 @@
 - hosts: all
   become: yes
 
-  # add new users
-  #vars_files:
-  #   - ./vars/users.yml
-
   roles:
      - users
      - sudo

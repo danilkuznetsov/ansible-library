@@ -23,15 +23,13 @@ users_group: [admin]
 root_passwd: $6$/LjEY1ZOa8D$b3uVy/38WPBr.K7Gib3TyzJJU9ZjMuJyBLy7UYYZ9nw1Jon2PG8YCYHi8WhpgcKOOMY1RI.Q2iCrHNWb9AjdS1
 
 users:
-  admin: # admin groups
-    - name: 'admin-user'
-      # passwd = qwert-11
-      passwd: $6$qtzv48Uk$3hRmaE.N9i1Byf/lj0wbX/0VrTzM.Ms.4Q0ifauywEUobP2DKa9h8iZGz0Dn3q4hOpp5AfT0d1EQCtk88WVG70
-      groups: ['admin','adm']
-      authorized_keys:
-        - admin-user
-  automation:
-    - name: 'robot'
-      # passwd = qwert-11
-      passwd: $6$qtzv48Uk$3hRmaE.N9i1Byf/lj0wbX/0VrTzM.Ms.4Q0ifauywEUobP2DKa9h8iZGz0Dn3q4hOpp5AfT0d1EQCtk88WVG70
-      groups: [] 
+  - name: 'admin-user'
+    # passwd = qwert-11
+    passwd: $6$qtzv48Uk$3hRmaE.N9i1Byf/lj0wbX/0VrTzM.Ms.4Q0ifauywEUobP2DKa9h8iZGz0Dn3q4hOpp5AfT0d1EQCtk88WVG70
+    groups: ['admin','adm']
+    authorized_keys:
+      - admin-user
+  - name: 'robot'
+    # passwd = qwert-11
+    passwd: $6$qtzv48Uk$3hRmaE.N9i1Byf/lj0wbX/0VrTzM.Ms.4Q0ifauywEUobP2DKa9h8iZGz0Dn3q4hOpp5AfT0d1EQCtk88WVG70
+    groups: []
