@@ -3,7 +3,7 @@
 # Run  bootstrap playbook in new host
 #
 # Usage:
-# ansible-playbook bootstrap.yml -v -k -i inventory/hosts
+# ansible-playbook -i inventories/example/hosts -u <user> -K -v ./bootstrap-host.yml < -l host group>
 #
 
 - hosts: all

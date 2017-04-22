@@ -3,7 +3,7 @@
 # Run users and sudo role
 #
 # Usage:
-# ansible-playbook bootstrap.yml -v -k -i inventory/hosts
+# ansible-playbook -i inventories/example/hosts -u <user> -K -v ./users.yml < -l host group>
 #
 
 - hosts: all

@@ -1,7 +1,8 @@
 ---
 # Runs an ansible role
 # Usage:
-#   ansible-playbook ./run_role.yml -u admin-user -i inventory/hosts -e role=my_awesome_role
+#
+# ansible-playbook -i inventories/example/hosts -u <user> -K -v ./run_role.yml <-l mservice> -e role=my_awesome_role
 #
 - hosts: all
   become: True
