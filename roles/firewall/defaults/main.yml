@@ -37,7 +37,7 @@ firewall_v4_default_rules:
     - -A INPUT -d 169.254.0.0/16 -i {{ private_interface }} -j DROP
 
   005 allow ping replies:
-    - -A INPUT -p icmp --icmp-type echo-request m limit --limit 10/sec -j ACCEPT
+    - -A INPUT -p icmp --icmp-type echo-request -m limit --limit 10/sec -j ACCEPT
 
   100 allow established related:
     - -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
