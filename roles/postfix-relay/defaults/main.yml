@@ -5,7 +5,7 @@
 # Default variables for postfix send only and relay role
 #
 
-postfix_password_file: "/etc/postfix/sasl/passwd"
+postfix_password_file: "/etc/postfix/sasl/passwd.db"
 postfix_smtp_sasl_auth_enable: "yes"
 postfix_smtp_sasl_password_maps: "hash:{{ postfix_password_file }}"
 postfix_smtp_sasl_security_options:  "noanonymous"
