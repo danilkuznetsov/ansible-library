@@ -4,6 +4,12 @@
 #
 # Tasks for role firewall
 # 
+- name: Install iptables system packages
+  apt:
+    name: "iptables"
+    install_recommends: yes
+    state: present 
+    update_cache: yes
 
 - name: Generate v4 rules
   template: src=generated.v4.j2 dest=/etc/iptables.v4.generated owner=root group=root mode=755
