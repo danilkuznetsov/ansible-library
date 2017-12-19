@@ -18,7 +18,7 @@
   with_items:
     - "mailbox_size_limit=0"
     - "recipient_delimiter=+"
-    - "inet_interfaces=localhost"
+    - "inet_interfaces=127.0.0.1"
     - "smtp_sasl_auth_enable={{ postfix_smtp_sasl_auth_enable }}"
     - "smtp_sasl_password_maps={{ postfix_smtp_sasl_password_maps }}"
     - "smtp_sasl_security_options={{ postfix_smtp_sasl_security_options }}"
