@@ -1,0 +1,13 @@
+---
+# file with default variables for virtualbox roles
+
+virtualbox_version: 6.0
+
+virtualbox_keys:
+  - oracle_vbox
+  - oracle_vbox_2016
+
+virtualbox_required_packages:
+  - build-essential
+  - dkms
+  - unzip

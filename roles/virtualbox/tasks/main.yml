@@ -1,0 +1,30 @@
+---
+# Tasks for virtualbox role 
+
+- name: Install required packages
+  apt:
+    name: '{{ item }}'
+    state: latest
+    update_cache: yes
+  with_items: '{{ virtualbox_required_packages }}'
+  become: yes
+    
+- name: Add VirtualBox repo keys
+  apt_key:
+    url: 'https://www.virtualbox.org/download/{{ item }}.asc'
+    state: present
+  with_items: '{{ virtualbox_keys }}'
+  become: yes 
+
+- name: Add VirtualBox repo
+  apt_repository:
+    repo: 'deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib'
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: 'Install virtualbox in version {{ virtualbox_version }}'
+  apt:
+    name: virtualbox-{{ virtualbox_version }}
+    state: present
+  become: yes  
