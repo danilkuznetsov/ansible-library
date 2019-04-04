@@ -4,8 +4,13 @@
 #
 # ansible-playbook -i inventories/example/hosts -u <user> -K -v ./run_role.yml <-l mservice> -e role=my_awesome_role
 #
+# or run role localy
+#
+# ansible-playbook -c local --limit "localhost," ./run_role.yml -K -i "localhost," -e role=my_awesome_role
+
+
 - hosts: all
   become: True
-  gather_facts: False
+  gather_facts: True
   roles:
     - "{{ role }}"
