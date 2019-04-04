@@ -1,0 +1,24 @@
+---
+# Tasks for vagrant role
+
+- name: 'Create tmp directory {{ vagrant_download_directory }}'
+  file:
+    path: '{{ vagrant_download_directory }}'
+    state: directory
+  become: true
+
+- name: 'Download vagrant {{ vagrant_version }} package'
+  get_url: url={{ vagrant_download_url }} dest={{ vagrant_download_directory }}
+  become: true
+
+- name: Install downloaded vagrant package
+  apt: 
+    deb: '{{ vagrant_download_directory }}/{{ vagrant_package }}'
+    state: present
+  become: true
+
+- name: 'Delete tmp directory {{ vagrant_download_directory }}'
+  file:
+    path: '{{ vagrant_download_directory }}'
+    state: absent
+  become: true

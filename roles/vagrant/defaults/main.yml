@@ -1,0 +1,9 @@
+---
+# file with default variables for vagrant role
+
+vagrant_version: '2.2.4'
+
+vagrant_package: 'vagrant_{{vagrant_version}}_{{ansible_architecture}}.deb'
+vagrant_download_url: 'https://releases.hashicorp.com/vagrant/{{vagrant_version}}/vagrant_{{vagrant_version}}_{{ansible_architecture}}.deb'
+vagrant_download_directory: '/tmp/vagrant-downloads'
+
