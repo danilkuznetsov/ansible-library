@@ -15,8 +15,8 @@
      - sysctl
      - postfix-relay
      - security
-     - firewall
      - swap
      - sshd
+     - firewall
 
      
