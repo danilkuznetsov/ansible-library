@@ -1,0 +1,7 @@
+
+---
+# File with default variables for java role;
+
+java_jre_version: 8
+
+java_home: '/usr/lib/jvm/java-8-openjdk-amd64'
