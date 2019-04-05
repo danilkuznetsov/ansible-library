@@ -1,0 +1,8 @@
+---
+# Tasks for supervisord role
+
+- name: Install lastest version of supervisord
+  apt:
+    name: supervisor
+    state: present
+  become: yes  
