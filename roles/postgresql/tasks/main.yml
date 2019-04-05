@@ -1,0 +1,23 @@
+---
+# Tasks for postgresql role 
+
+- name: Add PostgreSQL repo keys
+  apt_key:
+    url: 'https://www.postgresql.org/media/keys/{{ item }}.asc'
+    state: present
+  with_items: '{{ postgresql_keys }}'
+  become: yes 
+
+- name: Add PostgreSQL repo
+  apt_repository:
+    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
+    state: present
+    filename: 'postgresql.list'
+    update_cache: yes
+  become: yes
+
+- name: 'Install PostgreSQL in version {{ postgresql_version }}'
+  apt:
+    name: postgresql-{{ postgresql_version }}
+    state: present
+  become: yes
