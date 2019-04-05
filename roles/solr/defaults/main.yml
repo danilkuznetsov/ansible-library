@@ -1,0 +1,12 @@
+
+---
+# File with default variables for solr role
+
+# This role support only solr after 4 version
+
+solr_version: 7.6.0
+
+solr_download_url: "https://archive.apache.org/dist"
+solr_filename: solr-{{ solr_version }}
+
+solr_download_directory: '/tmp/solr-downloads'

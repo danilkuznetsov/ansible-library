@@ -1,0 +1,27 @@
+---
+# Tasks for solr role
+
+- name: 'Create tmp directory {{ solr_download_directory }}'
+  file:
+    path: '{{ solr_download_directory }}'
+    state: directory
+
+- name: 'Download  archive with Solr {{ solr_version }}'
+  get_url:
+    url: '{{ solr_download_url }}/lucene/solr/{{ solr_version }}/{{ solr_filename }}.tgz'
+    dest: '{{ solr_download_directory }}/{{ solr_filename }}.tgz'
+    force: false
+  
+- name: Extract Solr installation script
+  shell: 'tar xzf {{ solr_filename }}.tgz {{ solr_filename }}/bin/install_solr_service.sh --strip-components=2'
+  args:
+    chdir: '{{ solr_download_directory }}'
+
+- name: Run Solr installation script
+  command: ' bash {{ solr_download_directory }}/install_solr_service.sh  {{ solr_download_directory }}/{{ solr_filename }}.tgz'
+  become: true
+
+- name: 'Delete tmp directory {{ solr_download_directory }}'
+  file:
+    path: '{{ solr_download_directory }}'
+    state: absent
