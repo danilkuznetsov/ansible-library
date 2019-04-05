@@ -19,3 +19,4 @@ common_pkgs:
   - iftop
   - mc
   - ifupdown
+  - net-tools
